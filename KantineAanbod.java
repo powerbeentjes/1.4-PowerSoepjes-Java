@@ -5,7 +5,7 @@ public class KantineAanbod {
     // interne opslag voorraad
     private HashMap<String, ArrayList<Artikel>> aanbod;
     private HashMap<String, Integer> startVoorraad;
-    private HashMap<String, BigDecimal> prijzen;
+    private HashMap<String, Double> prijzen;
     
     /**
      * Constructor. Het eerste argument is een lijst met artikelnamen,
@@ -13,10 +13,10 @@ public class KantineAanbod {
      * is een lijst met hoeveelheden. Let op: de dimensies van de drie arrays
      * moeten wel gelijk zijn!
      */
-    public KantineAanbod(String[] artikelnaam, BigDecimal[] prijs, int[] hoeveelheid) {
+    public KantineAanbod(String[] artikelnaam, double[] prijs, int[] hoeveelheid) {
         aanbod=new HashMap<String, ArrayList<Artikel>>();
         startVoorraad=new HashMap<String, Integer>();
-        prijzen=new HashMap<String,BigDecimal>();
+        prijzen=new HashMap<String,Double>();
         for(int i=0;i<artikelnaam.length;i++) 
         {
             ArrayList<Artikel> artikelen=new ArrayList<Artikel>();
@@ -34,7 +34,7 @@ public class KantineAanbod {
     	ArrayList<Artikel> huidigeVoorraad = aanbod.get(productnaam);
     	int startHoeveelheid = startVoorraad.get(productnaam);
     	int huidigeHoeveelheid = huidigeVoorraad.size();
-    	BigDecimal prijs = prijzen.get(productnaam);
+    	double prijs = prijzen.get(productnaam);
         for(int j=huidigeHoeveelheid;j<startHoeveelheid;j++) 
         {
         	huidigeVoorraad.add(new Artikel(productnaam, prijs));

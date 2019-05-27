@@ -7,7 +7,7 @@ public class Kassa {
 
     private KassaRij kassarij;
     private int aantalartikelen;
-    private BigDecimal geld;
+    private double geld;
 
     /**
      * Constructor
@@ -56,13 +56,13 @@ public class Kassa {
      *
      * @return De totaalprijs
      */
-    public BigDecimal getTotaalPrijs(Dienblad dienblad) {
-        BigDecimal total = 0;
+    public double getTotaalPrijs(Dienblad dienblad) {
+        double total = 0;
         while(!dienblad.getArtikelen().empty()) {
             total += dienblad.getArtikelen().peek().getPrijs();
             dienblad.getArtikelen().pop();
         }
-        return Math.round();
+        return total;
     }
 
     /**
@@ -72,7 +72,7 @@ public class Kassa {
      *
      * @return hoeveelheid geld in de kassa
      */
-    public BigDecimal hoeveelheidGeldInKassa() {
+    public double hoeveelheidGeldInKassa() {
         return geld;
     }
 

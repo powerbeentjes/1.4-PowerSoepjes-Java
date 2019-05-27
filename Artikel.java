@@ -3,14 +3,14 @@ import java.math.*;
 public class Artikel {
 
     private String naam;
-    private BigDecimal prijs;
+    private double prijs;
 
     public Artikel() {
-        prijs = new BigDecimal(0).setScale(2,RoundingMode.HALF_UP);
+        prijs = 0;
         naam = "Lucht";
     }
 
-    public Artikel(String naam, BigDecimal prijs) {
+    public Artikel(String naam, double prijs) {
         this.prijs = prijs;
         this.naam = naam;
     }
@@ -23,7 +23,7 @@ public class Artikel {
         return naam;
     }
 
-    public BigDecimal getPrijs() {
+    public double getPrijs() {
         return prijs;
     }
 
@@ -31,7 +31,7 @@ public class Artikel {
         naam = nieuwenaam;
     }
 
-    public void setPrijs(BigDecimal nieuweprijs) {
+    public void setPrijs(double nieuweprijs) {
         prijs = nieuweprijs;
     }
 

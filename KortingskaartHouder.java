@@ -5,7 +5,7 @@ public interface KortingskaartHouder {
     /**
      * Methode om kortingspercentage op te vragen
      */
-    public BigDecimal geefKortingsPercentage();
+    public double geefKortingsPercentage();
 
     /**
      * Methode om op te vragen of er maximum per keer aan de korting zit
@@ -15,5 +15,5 @@ public interface KortingskaartHouder {
     /**
      * Methode om het maximum kortingsbedrag op te vragen
      */
-    public BigDecimal geefMaximum();
+    public double geefMaximum();
 }
