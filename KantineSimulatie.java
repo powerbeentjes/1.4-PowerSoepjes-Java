@@ -128,7 +128,7 @@ public class KantineSimulatie {
             if (i % 7 == 0) System.out.println("   WEEK #" + (i / 7 + 1));
             System.out.println("DAGTOTAAL " + datum.getDatumAsString() + ", " + dagnamen[i % 7]);
             System.out.println("Aantal artikelen verkocht: " + kantine.getKassa().aantalArtikelen());
-            System.out.println("Geld verdiend: " + kantine.getKassa().hoeveelheidGeldInKassa());
+            System.out.println("Geld verdiend: €" + String.format("%.2f" ,kantine.getKassa().hoeveelheidGeldInKassa()));
 
             kantine.getKassa().resetKassa();
             datum.volgendeDag();
