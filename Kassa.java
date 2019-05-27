@@ -1,10 +1,13 @@
 import java.util.Iterator;
+import java.util.Stack;
+import java.math.*;
+
 
 public class Kassa {
 
     private KassaRij kassarij;
     private int aantalartikelen;
-    private double geld;
+    private BigDecimal geld;
 
     /**
      * Constructor
@@ -20,11 +23,11 @@ public class Kassa {
      * de kassa worden bijgehouden. De implementatie wordt
      * later vervangen door een echte betaling door de persoon.
      *
-     * @param klant die moet afrekenen
+     * @param dienblad die moet afrekenen
      */
-    public void rekenAf(Dienblad klant) {
-        aantalartikelen = klant.getAantalArtikelen();
-        geld = klant.getTotaalPrijs();
+    public void rekenAf(Dienblad dienblad) {
+        aantalartikelen += getAantalArtikelen(dienblad);
+        geld += getTotaalPrijs(dienblad);
         kassarij.naarVolgendeKlant();
     }
 
@@ -39,13 +42,37 @@ public class Kassa {
     }
 
     /**
+     * Methode om aantal artikelen op dienblad te tellen
+     *
+     * @return Het aantal artikelen
+     */
+    public int getAantalArtikelen(Dienblad dienblad) {
+        return dienblad.getArtikelen().size();
+    }
+
+    /**
+     * Methode om de totaalprijs van de artikelen
+     * op dienblad uit te rekenen
+     *
+     * @return De totaalprijs
+     */
+    public BigDecimal getTotaalPrijs(Dienblad dienblad) {
+        BigDecimal total = 0;
+        while(!dienblad.getArtikelen().empty()) {
+            total += dienblad.getArtikelen().peek().getPrijs();
+            dienblad.getArtikelen().pop();
+        }
+        return Math.round();
+    }
+
+    /**
      * Geeft het totaalbedrag van alle artikelen die de kass
      * zijn gepasseerd, vanaf het moment dat de methode
      * resetKassa is aangeroepen.
      *
      * @return hoeveelheid geld in de kassa
      */
-    public double hoeveelheidGeldInKassa() {
+    public BigDecimal hoeveelheidGeldInKassa() {
         return geld;
     }
 
@@ -56,5 +83,9 @@ public class Kassa {
     public void resetKassa() {
         aantalartikelen = 0;
         geld = 0;
+    }
+
+    public KassaRij getKassarij() {
+        return kassarij;
     }
 }

@@ -3,22 +3,22 @@ import java.util.LinkedList;
 
 public class KassaRij {
 
-    private ArrayList<Dienblad> rij;
+    private LinkedList<Dienblad> rij;
 
     /**
      * Constructor
      */
     public KassaRij() {
-        rij = new ArrayList<>();
+        rij = new LinkedList<>();
     }
 
     /**
      * Persoon sluit achter in de rij aan
      *
-     * @param klant
+     * @param dienblad
      */
-    public void sluitAchteraan(Dienblad klant) {
-        rij.add(klant);
+    public void sluitAchteraan(Dienblad dienblad) {
+        rij.add(dienblad);
     }
 
     /**
@@ -29,7 +29,7 @@ public class KassaRij {
      * @return Eerste klant in de rij of null
      */
     public Dienblad eerstePersoonInRij() {
-        return rij.get(0);
+        return rij.getFirst();
     }
 
     /**
@@ -38,12 +38,10 @@ public class KassaRij {
      * @return Of er wel of geen rij bestaat
      */
     public boolean erIsEenRij() {
-        boolean yn = true;
-        if (rij.size() < 1) yn = false;
-        return yn;
+        return !rij.isEmpty();
     }
 
     public void naarVolgendeKlant() {
-        rij.remove(0);
+        rij.remove();
     }
 }

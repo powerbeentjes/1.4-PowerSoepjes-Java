@@ -46,6 +46,21 @@ public class Datum {
 		this.jaar = jaar;
 	}
 
+	public void volgendeDag() {
+		setDag(dag+1);
+		if (!bestaatDatum()) {
+			setDag(1);
+			setMaand(maand+1);
+			if (!bestaatDatum()) {
+				setMaand(1);
+				setJaar(jaar+1);
+				if (!bestaatDatum()) {
+					setJaar(1900);
+				}
+			}
+		}
+	}
+
 	public boolean bestaatDatum(){
 		if(dag > 31 | maand > 12 | jaar > 2100) return false;
 		if(dag < 1 | maand < 1 | jaar < 1900) return false;

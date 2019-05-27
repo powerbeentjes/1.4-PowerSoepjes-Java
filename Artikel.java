@@ -1,14 +1,16 @@
+import java.math.*;
+
 public class Artikel {
 
     private String naam;
-    private double prijs;
+    private BigDecimal prijs;
 
     public Artikel() {
-        prijs = 0;
-        naam = "Jan Modaal";
+        prijs = new BigDecimal(0).setScale(2,RoundingMode.HALF_UP);
+        naam = "Lucht";
     }
 
-    public Artikel(String naam, double prijs) {
+    public Artikel(String naam, BigDecimal prijs) {
         this.prijs = prijs;
         this.naam = naam;
     }
@@ -21,7 +23,7 @@ public class Artikel {
         return naam;
     }
 
-    public double getPrijs() {
+    public BigDecimal getPrijs() {
         return prijs;
     }
 
@@ -29,7 +31,7 @@ public class Artikel {
         naam = nieuwenaam;
     }
 
-    public void setPrijs(double nieuweprijs) {
+    public void setPrijs(BigDecimal nieuweprijs) {
         prijs = nieuweprijs;
     }
 
