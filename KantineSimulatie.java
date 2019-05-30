@@ -18,7 +18,7 @@ public class KantineSimulatie {
     private static final int MIN_ARTIKELEN_PER_PERSOON = 1;
     private static final int MAX_ARTIKELEN_PER_PERSOON = 4;
 
-    public static final int DAGEN = 8;
+    public static final int DAGEN = 365*4+93;
 
     /**
      * Constructor
