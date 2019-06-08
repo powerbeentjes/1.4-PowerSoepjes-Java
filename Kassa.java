@@ -6,6 +6,7 @@ import java.math.*;
 public class Kassa {
 
     private KassaRij kassarij;
+    private int aantalklanten;
     private int aantalartikelen;
     private double geld;
 
@@ -26,9 +27,14 @@ public class Kassa {
      * @param dienblad die moet afrekenen
      */
     public void rekenAf(Dienblad dienblad) {
-        aantalartikelen += getAantalArtikelen(dienblad);
+        aantalklanten++;
+        aantalartikelen += getAantalArtikelenOpDienblad(dienblad);
         geld += getTotaalPrijs(dienblad);
         kassarij.naarVolgendeKlant();
+    }
+
+    public int getAantalKlanten() {
+        return aantalklanten;
     }
 
     /**
@@ -37,17 +43,23 @@ public class Kassa {
      *
      * @return aantal artikelen
      */
-    public int aantalArtikelen() {
+
+    public int getAantalArtikelen() {
         return aantalartikelen;
     }
 
     /**
-     * Methode om aantal artikelen op dienblad te tellen
+     * Methode om aantal WERKELIJKE artikelen op dienblad te tellen
+     * Trekt het aantal Lucht-artikelen (geselecteerde artikelen waar geen voorraad van was) af van het totaal
      *
      * @return Het aantal artikelen
      */
-    public int getAantalArtikelen(Dienblad dienblad) {
-        return dienblad.getArtikelen().size();
+    public int getAantalArtikelenOpDienblad(Dienblad dienblad) {
+        int hoeveelheidlucht = 0;
+        for (int i = 0; i < dienblad.getArtikelen().size(); i++) {
+            if (dienblad.getArtikelen().get(i).getNaam() == "Lucht") hoeveelheidlucht++;
+        }
+        return dienblad.getArtikelen().size() - hoeveelheidlucht;
     }
 
     /**
@@ -81,6 +93,7 @@ public class Kassa {
      * de totale hoeveelheid geld in de kassa.
      */
     public void resetKassa() {
+        aantalklanten = 0;
         aantalartikelen = 0;
         geld = 0;
     }

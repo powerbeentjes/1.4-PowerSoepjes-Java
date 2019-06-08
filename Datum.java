@@ -14,12 +14,9 @@ public class Datum {
 	}
 
 	public Datum(int dag, int maand, int jaar){
-		this();
-		if(bestaatDatum()) {
-			this.dag = dag;
-			this.maand = maand;
-			this.jaar = jaar;
-		}
+			setDag(dag);
+			setMaand(maand);
+			setJaar(jaar);
 	}
 
 	public int getDag() {
@@ -83,8 +80,7 @@ public class Datum {
 	 * @return Geboortedatum
 	 */
 	public String getDatumAsString() {
-		String ymd = "" + jaar + "-" + maand + "-" + dag;
-		if (jaar + maand + dag < 1) ymd = "Onbekend";
-		return ymd;
+		if (bestaatDatum()) return "" + jaar + "-" + maand + "-" + dag;
+		return "Onbekend";
 		}
 }

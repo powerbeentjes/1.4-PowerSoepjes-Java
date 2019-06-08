@@ -55,12 +55,12 @@ public class KantineAanbod {
      * Retourneert null als de stapel leeg is.
      */
     private Artikel getArtikel(ArrayList<Artikel> stapel) {
-        if (stapel==null) { 
-            return null;
+        if (stapel==null) {
+            return new Artikel();
         }
         if (stapel.size()==0)
         {
-           return null;
+            return new Artikel();
         }
         else 
         {

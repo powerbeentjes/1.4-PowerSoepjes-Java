@@ -4,17 +4,19 @@ public class Persoon {
     private String voornaam;
     private String achternaam;
     private Datum geboortedatum;
-    private char geslacht;
+    enum Geslacht {MAN,VROUW};
+    private Geslacht geslacht;
+    protected String type;
 
     public Persoon() {
         this.bsn = "Onbekend";
         this.voornaam = "Onbekend";
         this.achternaam = "Onbekend";
         this.geboortedatum = new Datum();
-        this.geslacht = 'x';
+        this.type = "geen";
     }
 
-    public Persoon(String bsn, String voornaam, String achternaam, Datum geboortedatum, char geslacht) {
+    public Persoon(String bsn, String voornaam, String achternaam, Datum geboortedatum, Geslacht geslacht) {
         this.setBsn(bsn);
         this.setVoornaam(voornaam);
         this.setAchternaam(achternaam);
@@ -23,7 +25,11 @@ public class Persoon {
     }
 
     public String toString() {
-        return "BSN: " + this.getBsn() + ", Voornaam: " + this.getVoornaam() + ", Achternaam: " + this.getAchternaam() + ", Geboortedatum: " + this.getGeboortedatum() + ", Geslacht: " + this.getGeslacht();
+        return "Type klant: " + this.getType() + ", BSN: " + this.getBsn() + ", Voornaam: " + this.getVoornaam() + ", Achternaam: " + this.getAchternaam() + ", Geboortedatum: " + this.getGeboortedatum() + ", Geslacht: " + this.getGeslacht();
+    }
+
+    public String getType() {
+        return type;
     }
 
     public void setBsn(String bsn) {
@@ -42,13 +48,8 @@ public class Persoon {
         this.geboortedatum = geboortedatum;
     }
 
-    public void setGeslacht(char geslacht) {
-        if(geslacht == 'm' | geslacht == 'v') {
+    public void setGeslacht(Geslacht geslacht) {
             this.geslacht = geslacht;
-        } else {
-            System.out.println("Ongeldig geslacht: kies tussen v en m.");
-            this.geslacht = 'x';
-        }
     }
 
     public String getBsn() {
@@ -69,8 +70,8 @@ public class Persoon {
     }
 
     public String getGeslacht() {
-        if (geslacht == 'v') return "Vrouw";
-        if (geslacht == 'm') return "Man";
-        return "Onbekend";
+        if (geslacht == null) return "Onbekend";
+        if (geslacht == Geslacht.MAN) return "Man";
+        return "Man";
     }
 }
