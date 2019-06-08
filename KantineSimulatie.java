@@ -15,8 +15,8 @@ public class KantineSimulatie {
     private static double[] artikelprijzen = new double[]{1.50,2.00,5.55,0.88};
     private static final int MIN_ARTIKELEN_PER_SOORT = 10;
     private static final int MAX_ARTIKELEN_PER_SOORT = 20;
-    private static final int MIN_PERSONEN_PER_DAG = 50;
-    private static final int MAX_PERSONEN_PER_DAG = 100;
+    private static final int MIN_PERSONEN_PER_DAG = 5;
+    private static final int MAX_PERSONEN_PER_DAG = 20;
     private static final int MIN_ARTIKELEN_PER_PERSOON = 1;
     private static final int MAX_ARTIKELEN_PER_PERSOON = 4;
 
@@ -158,13 +158,13 @@ public class KantineSimulatie {
 
         double[] dagomzet = Administratie.berekenDagOmzet(omzetarray);
         System.out.println("Totaalomzet per weekdag:");
-        System.out.println("MAANDAG   " + dagomzet[0]);
-        System.out.println("DINSDAG   " + dagomzet[1]);
-        System.out.println("WOENSDAG  " + dagomzet[2]);
-        System.out.println("DONDERDAG " + dagomzet[3]);
-        System.out.println("VRIJDAG   " + dagomzet[4]);
-        System.out.println("ZATERDAG  " + dagomzet[5]);
-        System.out.println("ZONDAG    " + dagomzet[6]);
+        System.out.println("MAANDAG   €" + String.format("%.2f" ,dagomzet[0]));
+        System.out.println("DINSDAG   €" + String.format("%.2f" ,dagomzet[1]));
+        System.out.println("WOENSDAG  €" + String.format("%.2f" ,dagomzet[2]));
+        System.out.println("DONDERDAG €" + String.format("%.2f" ,dagomzet[3]));
+        System.out.println("VRIJDAG   €" + String.format("%.2f" ,dagomzet[4]));
+        System.out.println("ZATERDAG  €" + String.format("%.2f" ,dagomzet[5]));
+        System.out.println("ZONDAG    €" + String.format("%.2f" ,dagomzet[6]));
 
     }
 

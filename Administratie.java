@@ -7,7 +7,8 @@ public class Administratie {
      * Niet de bedoeling dat deze wordt gebruikt
      */
 
-    private Administratie() {}
+    private Administratie() {
+    }
 
     /**
      * Deze methode berekent de gemiddelde waarde van elementen in een double array
@@ -16,10 +17,10 @@ public class Administratie {
      * @return het gemiddelde
      */
 
-    public static double berekenGemiddelde (double[] waarden)  {
+    public static double berekenGemiddelde(double[] waarden) {
         if (waarden.length == 0) return 0;
         double totaal = 0;
-        for (int i = 0; i < waarden.length; i++){
+        for (int i = 0; i < waarden.length; i++) {
             totaal += waarden[i];
         }
         return totaal / waarden.length;
@@ -34,6 +35,14 @@ public class Administratie {
 
     public static double[] berekenDagOmzet(double[] omzet) {
         double[] temp = new double[DAYS_OF_WEEK];
+        for (int i = 0; i < omzet.length; i++) {
+            temp[i % 7] += omzet[i];
+        }
+        return temp;
+    }
+}
+    /**public static double[] berekenDagOmzet(double[] omzet) {
+        double[] temp = new double[DAYS_OF_WEEK];
         for(int i = 0; i < DAYS_OF_WEEK; i++) {
             int j = 0;
             while(omzet[i + 7 * j] < omzet.length) {
@@ -43,5 +52,6 @@ public class Administratie {
         }
         return temp;
     }
-
+    WHY WON'T THIS WORK??
 }
+*/
