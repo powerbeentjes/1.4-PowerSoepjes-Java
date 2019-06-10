@@ -1,11 +1,13 @@
-public class Persoon {
+public abstract class Persoon {
+
+    enum Geslacht {MAN,VROUW}
 
     private String bsn;
     private String voornaam;
     private String achternaam;
     private Datum geboortedatum;
-    enum Geslacht {MAN,VROUW};
     private Geslacht geslacht;
+    private Betaalwijze betaalwijze;
     protected String type;
 
     public Persoon() {
@@ -14,9 +16,12 @@ public class Persoon {
         this.achternaam = "Onbekend";
         this.geboortedatum = new Datum();
         this.type = "geen";
+        this.betaalwijze = new Contant();
+        this.betaalwijze.setSaldo(10);
     }
 
     public Persoon(String bsn, String voornaam, String achternaam, Datum geboortedatum, Geslacht geslacht) {
+        this();
         this.setBsn(bsn);
         this.setVoornaam(voornaam);
         this.setAchternaam(achternaam);
@@ -65,13 +70,20 @@ public class Persoon {
     }
 
     public String getGeboortedatum() {
-        String gds = geboortedatum.getDatumAsString();
-        return gds;
+        return geboortedatum.getDatumAsString();
     }
 
     public String getGeslacht() {
         if (geslacht == null) return "Onbekend";
         if (geslacht == Geslacht.MAN) return "Man";
         return "Man";
+    }
+
+    public Betaalwijze getBetaalwijze() {
+        return betaalwijze;
+    }
+
+    public void setBetaalwijze(Betaalwijze betaalwijze) {
+        this.betaalwijze = betaalwijze;
     }
 }

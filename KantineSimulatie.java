@@ -8,11 +8,13 @@ public class KantineSimulatie {
     private static final String[] DAGNAMEN = new String[]{"Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag", "Zondag"};
     private KantineAanbod aanbod;
     private Random random;
+    private Persoon klant;
     private double[] klantenarray;
     private double[] artikelenarray;
     private double[] omzetarray;
     private static final String[] artikelnamen = new String[]{"Soepie", "Crostini", "Supersoepie", "Melk"};
     private static double[] artikelprijzen = new double[]{1.50,2.00,5.55,0.88};
+    private static final String outputdivider = "============================================================================================";
     private static final int MIN_ARTIKELEN_PER_SOORT = 10;
     private static final int MAX_ARTIKELEN_PER_SOORT = 20;
     private static final int MIN_PERSONEN_PER_DAG = 5;
@@ -45,9 +47,9 @@ public class KantineSimulatie {
      * Methode om een array van random getallen liggend tussen
      * min en max van de gegeven lengte te genereren
      *
-     * @param lengte
-     * @param min
-     * @param max
+     * @param lengte lengte van de te genereren array
+     * @param min minimale waarde van elementen in de array
+     * @param max maximale waarde van elementen in de array
      * @return De array met random getallen
      */
     private int[] getRandomArray(int lengte, int min, int max) {
@@ -63,8 +65,8 @@ public class KantineSimulatie {
      * Methode om een random getal tussen min(incl)
      * en max(incl) te genereren.
      *
-     * @param min
-     * @param max
+     * @param min minimale waarde van het te genereren getal
+     * @param max maximale waarde van het te genereren getal
      * @return Een random getal
      */
     private int getRandomValue(int min, int max) {
@@ -75,8 +77,8 @@ public class KantineSimulatie {
      * Methode om op basis van een array van indexen voor de array
      * artikelnamen de bijhorende array van artikelnamen te maken
      *
-     * @param indexen
-     * @return De array met artikelnamen
+     * @param indexen de array met indexnummers van artikelen
+     * @return De array met de artikelnamen
      */
     private String[] geefArtikelNamen(int[] indexen) {
         String[] artikelen = new String[indexen.length];
@@ -93,7 +95,7 @@ public class KantineSimulatie {
      * Deze methode simuleert een aantal dagen
      * in het verloop van de kantine
      *
-     * @param dagen
+     * @param dagen het aantal dagen dat gesimuleerd dient te worden
      */
     public void simuleer(int dagen) {
 
@@ -110,7 +112,7 @@ public class KantineSimulatie {
                 // en bedenk hoeveel artikelen worden gepakt
 
                 int typeklant = random.nextInt(100);
-                Persoon klant = null;
+
                 if (typeklant < 90) klant = new Student();
                 else if (typeklant < 100) klant = new Docent();
                 else klant = new KantineMedewerker();
@@ -137,7 +139,11 @@ public class KantineSimulatie {
             }
 
             kantine.verwerkRijVoorKassa();
-            if (i % 7 == 0) System.out.println("   WEEK #" + (i / 7 + 1));
+            System.out.println(outputdivider);
+            if (i % 7 == 0) {
+                System.out.println("   WEEK #" + (i / 7 + 1));
+                System.out.println(outputdivider);
+            }
             System.out.println("DAGTOTAAL " + datum.getDatumAsString() + ", " + DAGNAMEN[i % 7]);
             System.out.println("Aantal klanten: " + kantine.getKassa().getAantalKlanten());
             klantenarray[i] = kantine.getKassa().getAantalKlanten();
@@ -150,7 +156,7 @@ public class KantineSimulatie {
             datum.volgendeDag();
 
         }
-        System.out.println("==========================================================");
+        System.out.println(outputdivider);
         System.out.println("Simulatie van " + DAGEN + " dagen voltooid");
         System.out.println("Gemiddeld aantal klanten: " + String.format("%.1f" ,Administratie.berekenGemiddelde(klantenarray)));
         System.out.println("Gemiddelde omzet: €" + String.format("%.2f" ,Administratie.berekenGemiddelde(omzetarray)));
@@ -169,19 +175,19 @@ public class KantineSimulatie {
     }
 
     /**
-     * In deze methode kiest een Persoon met een dienblad
-     * de artikelen in artikelnamen.
+     * In deze methode selecteert een Persoon met een dienblad willekeurig
+     * artikelen uit de array artikelnamen, plaatst deze op het dienblad en sluit vervolgens achteraan.
      *
-     * @param dienblad
-     * @param artikelnamen
+     * @param dienblad het dienblad waarop de artikelen worden geplaatst
+     * @param artikelnamen de gekozen artikelen die uit het aanbod moeten worden opgehaald
      */
     public void loopPakSluitAan(Dienblad dienblad, String[] artikelnamen) {
 
-        for (int i = 0; i < artikelnamen.length; i++) {
-            dienblad.voegToe(aanbod.getArtikel(artikelnamen[i]));
+        for (String artikelnaam : artikelnamen) {
+            dienblad.voegToe(aanbod.getArtikel(artikelnaam));
         }
 
-        kantine.getKassa().getKassarij().sluitAchteraan(dienblad);
+        kantine.getKassarij().sluitAchteraan(dienblad);
     }
 
     /**

@@ -1,19 +1,11 @@
-public class Administratie {
+public abstract class Administratie {
 
     static final int DAYS_OF_WEEK = 7;
 
     /**
-     * Constructor
-     * Niet de bedoeling dat deze wordt gebruikt
-     */
-
-    private Administratie() {
-    }
-
-    /**
      * Deze methode berekent de gemiddelde waarde van elementen in een double array
      *
-     * @param waarden
+     * @param waarden array van waarden
      * @return het gemiddelde
      */
 
@@ -29,8 +21,8 @@ public class Administratie {
     /**
      * Methode om de totale omzet op een bepaalde weekdag uit te rekenen
      *
-     * @param omzet
-     * @return array (7 elementen) met dagomzetten
+     * @param omzet array met de omzet van elke dag in de simulatie, op volgorde.
+     * @return array (7 elementen) met dagomzetten.
      */
 
     public static double[] berekenDagOmzet(double[] omzet) {
@@ -41,17 +33,3 @@ public class Administratie {
         return temp;
     }
 }
-    /**public static double[] berekenDagOmzet(double[] omzet) {
-        double[] temp = new double[DAYS_OF_WEEK];
-        for(int i = 0; i < DAYS_OF_WEEK; i++) {
-            int j = 0;
-            while(omzet[i + 7 * j] < omzet.length) {
-                temp[i] += omzet[i + 7 * j];
-                j++;
-            }
-        }
-        return temp;
-    }
-    WHY WON'T THIS WORK??
-}
-*/

@@ -7,8 +7,8 @@ public class Kassa {
 
     private KassaRij kassarij;
     private int aantalklanten;
-    private int aantalartikelen;
-    private double geld;
+    public int aantalartikelen;
+    public double geld;
 
     /**
      * Constructor
@@ -27,9 +27,30 @@ public class Kassa {
      * @param dienblad die moet afrekenen
      */
     public void rekenAf(Dienblad dienblad) {
+        // Totaalprijs van dienblad wordt opgehaald.
+
+        int artikelenopdienblad = getAantalArtikelenOpDienblad(dienblad);
+        double totaalprijs = getTotaalPrijs(dienblad);
+
+        // Eventuele korting wordt doorgerekend.
+        if (dienblad.getKlant() instanceof KortingskaartHouder) {
+            double korting = ((KortingskaartHouder) dienblad.getKlant()).geefKortingsPercentage() * totaalprijs;
+            if (korting > ((KortingskaartHouder) dienblad.getKlant()).geefMaximum()) {
+                korting = ((KortingskaartHouder) dienblad.getKlant()).geefMaximum();
+            }
+            totaalprijs -= korting;
+        }
+
+        // Saldo wordt gecheckt, en indien toereikend wordt er geld van de klant naar de kassa overgemaakt.
+        // Als saldo niet toereikend is dan vertrekt de klant zonder iets te kopen en komt de volgende klant.
+        try {
+            dienblad.getKlant().getBetaalwijze().betaal(totaalprijs);
+            aantalartikelen += artikelenopdienblad;
+            geld += totaalprijs;
+        } catch(TeWeinigGeldException e) {
+            System.out.println(e + dienblad.getKlant().getVoornaam() + " " + dienblad.getKlant().getAchternaam());
+        }
         aantalklanten++;
-        aantalartikelen += getAantalArtikelenOpDienblad(dienblad);
-        geld += getTotaalPrijs(dienblad);
         kassarij.naarVolgendeKlant();
     }
 
@@ -57,7 +78,7 @@ public class Kassa {
     public int getAantalArtikelenOpDienblad(Dienblad dienblad) {
         int hoeveelheidlucht = 0;
         for (int i = 0; i < dienblad.getArtikelen().size(); i++) {
-            if (dienblad.getArtikelen().get(i).getNaam() == "Lucht") hoeveelheidlucht++;
+            if (dienblad.getArtikelen().get(i).getNaam().equals("Lucht")) hoeveelheidlucht++;
         }
         return dienblad.getArtikelen().size() - hoeveelheidlucht;
     }
