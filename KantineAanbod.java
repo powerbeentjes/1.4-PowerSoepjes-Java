@@ -1,4 +1,5 @@
 import java.util.*;
+import java.math.*;
 
 public class KantineAanbod {
     // interne opslag voorraad
@@ -13,12 +14,12 @@ public class KantineAanbod {
      * moeten wel gelijk zijn!
      */
     public KantineAanbod(String[] artikelnaam, double[] prijs, int[] hoeveelheid) {
-        aanbod=new HashMap<String, ArrayList<Artikel>>();
-        startVoorraad=new HashMap<String, Integer>();
-        prijzen=new HashMap<String,Double>();
+        aanbod = new HashMap<>();
+        startVoorraad = new HashMap<>();
+        prijzen = new HashMap<>();
         for(int i=0;i<artikelnaam.length;i++) 
         {
-            ArrayList<Artikel> artikelen=new ArrayList<Artikel>();
+            ArrayList<Artikel> artikelen = new ArrayList<>();
             for(int j=0;j<hoeveelheid[i];j++) 
             {
                 artikelen.add(new Artikel(artikelnaam[i], prijs[i]));
@@ -54,12 +55,12 @@ public class KantineAanbod {
      * Retourneert null als de stapel leeg is.
      */
     private Artikel getArtikel(ArrayList<Artikel> stapel) {
-        if (stapel==null) { 
-            return null;
+        if (stapel==null) {
+            return new Artikel();
         }
         if (stapel.size()==0)
         {
-           return null;
+            return new Artikel();
         }
         else 
         {
@@ -73,7 +74,7 @@ public class KantineAanbod {
     /**
      * Publieke methode om een artikel via naam van de stapel te pakken.
      * Retouneert null als artikel niet bestaat of niet op voorraad is.
-     * @param naam (van artikel)
+     * @param productnaam (van artikel)
      * @return artikel (of null)
      */
     public Artikel getArtikel(String productnaam) {

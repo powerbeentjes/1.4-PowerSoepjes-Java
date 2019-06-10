@@ -1,10 +1,12 @@
+import java.math.*;
+
 public abstract class Betaalwijze {
 
     protected double saldo;
 
     /**
      * Methode om krediet te initialiseren
-     * @param saldo
+     * @param saldo hoogte van het saldo voor de eigenaar van deze betaalwijze
      */
     public void setSaldo(double saldo) {
         this.saldo = saldo;
@@ -13,8 +15,7 @@ public abstract class Betaalwijze {
     /**
      * Methode om betaling af te handelen
      *
-     * @param tebetalen
-     * @return Boolean om te kijken of er voldoende saldo is
+     * @param tebetalen prijs die de eigenaar van deze betaalwijze dient te betalen
      */
-    public abstract boolean betaal(double tebetalen);
+    public abstract void betaal(double tebetalen) throws TeWeinigGeldException;
 }

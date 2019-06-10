@@ -3,41 +3,40 @@ import java.util.Iterator;
 import java.util.Stack;
 
 public class Dienblad {
-    private ArrayList<Artikel> artikelen;
+    private Stack<Artikel> artikelen;
+    private Persoon klant;
 
     /**
-     * Constructor
+     * Constructors
      */
     public Dienblad() {
-        // method body omitted
+        artikelen = new Stack<>();
+    }
+
+    public Dienblad(Persoon klant) {
+        this();
+        this.klant = klant;
     }
 
     /**
      * Methode om artikel aan dienblad toe te voegen
      *
-     * @param artikel
+     * @param artikel Het artikel.
      */
     public void voegToe(Artikel artikel) {
-        // method body omitted
+        artikelen.push(artikel);
     }
 
-    /**
-     * Methode om aantal artikelen op dienblad te tellen
-     *
-     * @return Het aantal artikelen
-     */
-    public int getAantalArtikelen() {
-        // method body omitted
+    public Persoon getKlant() {
+        return klant;
     }
 
-    /**
-     * Methode om de totaalprijs van de artikelen
-     * op dienblad uit te rekenen
-     *
-     * @return De totaalprijs
-     */
-    public double getTotaalPrijs() {
-        // method body omitted
+    public Stack<Artikel> getArtikelen() {
+        return artikelen;
+    }
+
+    public void setKlant(Persoon klant) {
+        this.klant = klant;
     }
 }
 

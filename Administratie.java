@@ -1,43 +1,34 @@
-public class Administratie {
+public abstract class Administratie {
+
+    static final int DAYS_OF_WEEK = 7;
 
     /**
-     * Deze methode berekent van de int array aantal de gemiddelde waarde
+     * Deze methode berekent de gemiddelde waarde van elementen in een double array
      *
-     * @param aantal
+     * @param waarden array van waarden
      * @return het gemiddelde
      */
-    public double berekenGemiddeldAantal(int[] aantal) {
-        // method body omitted
+
+    public static double berekenGemiddelde(double[] waarden) {
+        if (waarden.length == 0) return 0;
+        double totaal = 0;
+        for (int i = 0; i < waarden.length; i++) {
+            totaal += waarden[i];
+        }
+        return totaal / waarden.length;
     }
 
     /**
-     * Deze methode berekent van de double array omzet de gemiddelde waarde
+     * Methode om de totale omzet op een bepaalde weekdag uit te rekenen
      *
-     * @param omzet
-     * @return het gemiddelde
-     */
-    public double berekenGemiddeldeOmzet(double[] omzet) {
-        // method body omitted
-    }
-
-    /**
-     * Methode om dagomzet uit te rekenen
-     *
-     * @param omzet
-     * @return array (7 elementen) met dagomzetten
+     * @param omzet array met de omzet van elke dag in de simulatie, op volgorde.
+     * @return array (7 elementen) met dagomzetten.
      */
 
     public static double[] berekenDagOmzet(double[] omzet) {
-        double[] temp = new double[7];
-        for(int i = 0; i < 7; i++) {
-
-            int j = 0;
-            while( ... ) {
-                temp[i] += omzet[i + 7 * j];
-
-                // omitted
-
-            }
+        double[] temp = new double[DAYS_OF_WEEK];
+        for (int i = 0; i < omzet.length; i++) {
+            temp[i % 7] += omzet[i];
         }
         return temp;
     }
